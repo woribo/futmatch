@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-posta Doğrulama - Futmatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Genel Sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #E4E8EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .login-container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #E4E8EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      background-color: #79EE8D;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header img {
+      height: 100%;
+      width: auto;
+    }
+    .form-container {
+      padding: 30px;
+    }
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #060C1C;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    form label {
+      margin-bottom: 10px;
+      color: #060C1C;
+      font-weight: 600;
+    }
+    form input {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #060C1C;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #fff;
+      outline: none;
+      text-align: center;
+    }
+    form input:focus {
+      border-color: #79EE8D;
+    }
+    form button {
+      background-color: #79EE8D;
+      color: #060C1C;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    form button:hover {
+      background-color: #060C1C;
+      color: #79EE8D;
+    }
+    .resend {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #060C1C;
+    }
+    .resend a {
+      color: #79EE8D;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .resend a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Header: Futmatch logosu -->
+    <div class="header">
+      <img src="logo.png" alt="Futmatch Logo">
+    </div>
+    <div class="form-container">
+      <h1>E-posta Doğrulama</h1>
+      <form id="verification-form">
+        <label for="verification-code">Doğrulama Kodu</label>
+        <input type="text" id="verification-code" placeholder="Kodunuzu girin" required>
+        <button type="submit">Doğrula</button>
+      </form>
+      <div class="resend">
+        <p>Doğrulama kodunu almadınız mı? <a href="#">Tekrar gönder</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('verification-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Burada kod doğrulama işlemleri yapılabilir.
+      alert("E-posta doğrulama başarılı!");
+      // İşlem sonrası yönlendirme yapılacaksa örneğin:
+      // window.location.href = "hesap-dashboard.html";
+    });
+  </script>
+</body>
+</html>

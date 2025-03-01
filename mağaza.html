@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futmatch - Coin Satın Al</title>
+  <!-- Google Fonts ve FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <style>
+    /* Genel Sıfırlama ve Font */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #E4E8EB;
+      color: #11151f;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #060C1C;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .navbar-left h2 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navbar-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    .navbar-links a:hover {
+      color: #79EE8D;
+    }
+    .menu-icon {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .navbar-right {
+        gap: 10px;
+      }
+      .navbar-links {
+        display: none;
+      }
+      .menu-icon {
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+    /* İçerik Alanı */
+    .content {
+      padding: 80px 20px 20px; /* Navbar'ın kapladığı alan kadar üst boşluk */
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    /* Coin Paket Kartları: 4 sütun, 2 satır */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    /* Kart Tasarımı */
+    .card {
+      background-color: #fff;
+      border: 1px solid #79EE8D;
+      border-radius: 8px;
+      text-align: center;
+      padding: 0.5rem;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card img {
+      width: 240px;
+      margin-bottom: 0.5rem;
+    }
+    .card h3 {
+      color: #060C1C;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img">
+      <h2>Futmatch</h2>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-links">
+        <a href="ana-sayfa.html">Ana Sayfa</a>
+        <a href="mac-bul.html">Maç Bul</a>
+        <a href="kulubum.html">Kulübüm</a>
+        <a href="profile.html">Profil</a>
+        <a href="settings.html">Ayarlar</a>
+        <a href="livechat.html">Canlı Destek</a>
+      </div>
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+  <!-- İçerik: Coin Kartları -->
+  <div class="content">
+    <div class="card-container">
+      <!-- Üst Satır -->
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>10 FutCoin</h3>
+        <p>49.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>20 FutCoin</h3>
+        <p>99.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>30 FutCoin</h3>
+        <p>149.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>40 FutCoin</h3>
+        <p>199.99₺</p>
+      </div>
+      <!-- Alt Satır -->
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>50 FutCoin</h3>
+        <p>249.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>100 FutCoin</h3>
+        <p>499.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>200 FutCoin</h3>
+        <p>999.99₺</p>
+      </div>
+      <div class="card">
+        <img src="coinsb.png" alt="FutCoin">
+        <h3>400 FutCoin</h3>
+        <p>199.00₺</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kulübüm - Futmatch</title>
+  <!-- Google Fonts ve Font Awesome -->
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Temel Sıfırlama ve Font Ayarı */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #E4E8EB; /* Arka plan */
+      color: #060C1C;           /* Metin rengi */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #060C1C;
+      padding: 15px 20px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .navbar-left h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #E4E8EB;
+    }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navbar-links a {
+      color: #E4E8EB;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    .navbar-links a:hover {
+      color: #79EE8D;
+    }
+    .menu-icon i {
+      font-size: 24px;
+      cursor: pointer;
+      color: #E4E8EB;
+    }
+
+    /* Sayfa İçeriği Konteyneri */
+    .container {
+      margin-top: 80px; /* Navbar yüksekliği kadar boşluk bırak */
+      padding: 20px;
+    }
+
+    /* Kulüp Kartı (üstteki siyah kart) */
+    .club-card {
+      background-color: #060C1C;
+      color: #E4E8EB;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .club-icon-circle {
+      width: 70px;
+      height: 70px;
+      background-color: #E4E8EB;
+      color: #060C1C;
+      border-radius: 50%;
+      margin: 0 auto 10px; /* Ortalamak ve alttan boşluk */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .club-card h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .club-card p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .gold-text {
+      color: gold;
+      font-weight: 600;
+      margin: 0 5px;
+    }
+
+    .club-rating {
+      color: #79EE8D;
+      margin-left: 5px;
+      font-weight: 600;
+    }
+
+    /* Başarı Sıralaması Listesi */
+    .ranking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ranking-item {
+      background-color: #79EE8D;
+      color: #060C1C;
+      border-radius: 30px;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .ranking-item .rank-number {
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    .ranking-item .team-name {
+      flex: 1;
+    }
+
+    .ranking-item .points {
+      margin-left: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Üst Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <h2>Futmatch</h2>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-links">
+        <a href="ana-sayfa.html">Ana Sayfa</a>
+        <a href="mac-bul.html">Maç Bul</a>
+        <a href="kulubum.html">Kulübüm</a>
+        <a href="profile.html">Profil</a>
+        <a href="settings.html">Ayarlar</a>
+        <a href="livechat.html">Canlı Destek</a>
+      </div>
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sayfa İçeriği -->
+  <div class="container">
+    <!-- Siyah Kulüp Kartı -->
+    <div class="club-card">
+      <!-- Ortadaki dairesel ikon (krampon vb.) -->
+      <div class="club-icon-circle">
+        <i class="fas fa-shoe-prints"></i>
+      </div>
+      <h2>Kulübüm</h2>
+      <p>
+        <span class="gold-text">Gold 1</span>
+        <i class="fas fa-crown gold-text"></i>
+        <span class="club-rating">4. <i class="fas fa-globe"></i></span>
+      </p>
+    </div>
+
+    <!-- Başarı Sıralaması -->
+    <div class="ranking-list">
+      <div class="ranking-item">
+        <span class="rank-number">1.</span>
+        <span class="team-name">Demir Bilek FC</span>
+        <span class="points">252p</span>
+      </div>
+      <div class="ranking-item">
+        <span class="rank-number">2.</span>
+        <span class="team-name">Aslanlar FC</span>
+        <span class="points">250p</span>
+      </div>
+      <div class="ranking-item">
+        <span class="rank-number">3.</span>
+        <span class="team-name">Doğanlar FC</span>
+        <span class="points">248p</span>
+      </div>
+      <div class="ranking-item">
+        <span class="rank-number">4.</span>
+        <span class="team-name">FutMatch FC</span>
+        <span class="points">245p</span>
+      </div>
+      <div class="ranking-item">
+        <span class="rank-number">5.</span>
+        <span class="team-name">Kara Kartallar FC</span>
+        <span class="points">240p</span>
+      </div>
+      <div class="ranking-item">
+        <span class="rank-number">6.</span>
+        <span class="team-name">Aydınlar FC</span>
+        <span class="points">238p</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

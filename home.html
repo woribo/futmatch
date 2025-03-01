@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futmatch - Ana Sayfa</title>
+  <!-- Google Fonts ve FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Genel Sıfırlama ve Font */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #E4E8EB;
+      color: #11151f;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Navbar CSS kodları kaldırıldı */
+    
+    /* ANA İÇERİK (Hero Section) */
+    .hero-section {
+      margin-top: 50px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .hero-logo {
+      width: 300px;
+      margin-bottom: 5px;
+    }
+    .hero-section h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+      color: #060C1C;
+    }
+    .hero-section p {
+      font-size: 18px;
+      max-width: 600px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .hero-btn {
+      background-color: #79EE8D;
+      color: #060C1C;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .hero-btn:hover {
+      background-color: #060C1C;
+      color: #fff;
+    }
+    
+    /* FOOTER */
+    .footer {
+      background-color: #060C1C;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ana İçerik (Hero Section) -->
+  <section class="hero-section">
+    <img src="logo.png" alt="Futmatch Logo" class="hero-logo">
+    <h1>Futmatch'e Hoş Geldiniz</h1>
+    <p>
+      Futbol tutkunları için en iyi maç eşleştirme, turnuva ve profil platformu.  
+      Takımını kur, maçlara katıl ve rekabeti hisset!
+    </p>
+    <a href="giris.html" class="hero-btn">Giriş Yap</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Futmatch. Tüm hakları saklıdır.</p>
+  </footer>
+
+</body>
+</html>

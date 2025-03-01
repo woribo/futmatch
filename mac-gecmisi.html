@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Futmatch</title>
+  <!-- Font Awesome (ikonlar için) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <style>
+    /* Temel sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #E4E8EB; /* Sayfa arka planı beyaz */
+      color: #060C1C; /* Genel metin rengi (navbar dışı) */
+      padding-top: 80px; /* Sabit navbar için boşluk */
+    }
+    /* Navbar - Profil sayfasındaki gibi */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #060C1C; /* Navbar arka planı siyah */
+      border-bottom: 1px solid #79EE8D; /* Yeşil çizgi */
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+    .navbar-left .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .navbar-left h2 {
+      font-size: 24px;
+      color: #E4E8EB; /* Futmatch yazısı beyaz */
+      margin: 0;
+    }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navbar-links a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #E4E8EB;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .navbar-links a:hover {
+      color: #79EE8D;
+    }
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      color: #E4E8EB;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 768px) {
+      .navbar-links {
+        display: none;
+      }
+      .menu-icon {
+        display: block;
+      }
+    }
+    
+    /* Üstteki Kulüp Bilgisi Kutusu */
+    .club-info-container {
+      max-width: 500px;
+      margin: 20px auto 0; /* Üstten boşluk, ortaya hizalı */
+      padding: 10px;
+    }
+    .club-info-box {
+      display: flex;
+      align-items: center;
+      background-color: #060C1C;
+      border: 1px solid #79EE8D;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    /* Logo (beyaz daire içinde) */
+    .club-logo-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .club-logo-container img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    /* Kulüp metinleri */
+    .club-text-container {
+      margin-left: 15px;
+      color: #E4E8EB;
+    }
+    .club-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .club-rank {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    .club-rank img {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+    /* Sağdaki "4." ve ikon */
+    .club-level {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      color: #E4E8EB;
+    }
+    .club-level img {
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+    }
+    
+    /* Ana içerik kutusu (Kulübüm / Maç Geçmişi sekmeleri + maç kutucukları) */
+    .content-container {
+      background-color: #060C1C;  /* Siyah kutu */
+      color: #E4E8EB;            /* İçerik metin rengi */
+      max-width: 500px;
+      margin: 20px auto; /* Biraz aşağıda konumlandırma */
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    /* Sekmeler */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      background: none;
+      border: none;
+      color: #E4E8EB;
+      font-size: 1rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin: 0 10px;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    .tabs button.active,
+    .tabs button:hover {
+      border-bottom: 2px solid #79EE8D;
+      color: #79EE8D;
+    }
+    
+    /* Maç Geçmişi Kutuları Buton olarak */
+    button.match-box {
+      width: 100%;
+      background-color: #0A1321;
+      border: 1px solid #79EE8D;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Logo çerçevesi (beyaz daire) */
+    .team-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .team-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .team-name {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #E4E8EB;
+    }
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .vs-text {
+      font-size: 1.2rem;
+      color: #E4E8EB;
+    }
+    .score {
+      font-size: 1.5rem;
+      color: #79EE8D;
+      margin-top: 5px;
+    }
+    
+    /* Player Card Stili (varsa) */
+    .player-list {
+      margin-top: 10px;
+    }
+    button.player-card {
+      all: unset;
+      background-color: #0A1321;
+      color: #ffffff;
+      border: 1px solid #79EE8D;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    button.player-card:focus {
+      outline: none;
+    }
+    .player-card img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 2px solid #79EE8D;
+      object-fit: cover;
+    }
+    .player-info {
+      text-align: left;
+    }
+    .player-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .player-rating {
+      color: #79EE8D;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <h2>Futmatch</h2>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-links">
+        <a href="ana-sayfa.html">Ana Sayfa</a>
+        <a href="mac-bul.html">Maç Bul</a>
+        <a href="kulubum.html">Kulübüm</a>
+        <a href="profile.html">Profil</a>
+        <a href="settings.html">Ayarlar</a>
+        <a href="livechat.html">Canlı Destek</a>
+      </div>
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Kulüp Bilgisi Kutusu -->
+  <div class="club-info-container">
+    <div class="club-info-box">
+      <!-- Soldaki beyaz daire içinde logo.png -->
+      <div class="club-logo-container">
+        <img src="logo.png" alt="Club Logo">
+      </div>
+      <!-- Ortadaki metinler -->
+      <div class="club-text-container">
+        <div class="club-name">FutMatch Futbol Kulübü</div>
+        <div class="club-rank">
+          <img src="gold1.png" alt="Gold 1">
+          <span>Gold 1</span>
+        </div>
+      </div>
+      <!-- Sağdaki 4. ve swirl.png -->
+      <div class="club-level">
+        <span>4.</span>
+        <img src="swirl.png" alt="Swirl Icon">
+      </div>
+    </div>
+  </div>
+
+  <!-- İçerik Kutusu -->
+  <div class="content-container">
+    <!-- Sekmeler -->
+    <div class="tabs">
+      <button onclick="window.location.href='kulubum.html'">Kulübüm</button>
+      <button class="active" onclick="window.location.href='mac-gecmisi.html'">Maç Geçmişi</button>
+    </div>
+
+    <!-- 5 adet maç geçmişi buton -->
+    <div class="match-history">
+      <button class="match-box">
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+        <div class="center">
+          <div class="vs-text">VS</div>
+          <div class="score">5 - 4</div>
+        </div>
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+      </button>
+
+      <button class="match-box">
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+        <div class="center">
+          <div class="vs-text">VS</div>
+          <div class="score">5 - 4</div>
+        </div>
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+      </button>
+
+      <button class="match-box">
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+        <div class="center">
+          <div class="vs-text">VS</div>
+          <div class="score">5 - 4</div>
+        </div>
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+      </button>
+
+      <button class="match-box">
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+        <div class="center">
+          <div class="vs-text">VS</div>
+          <div class="score">5 - 4</div>
+        </div>
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+      </button>
+
+      <button class="match-box">
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+        <div class="center">
+          <div class="vs-text">VS</div>
+          <div class="score">5 - 4</div>
+        </div>
+        <div class="team">
+          <div class="team-logo">
+            <img src="logo.png" alt="Team Logo">
+          </div>
+          <div class="team-name">FutMatch FC</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

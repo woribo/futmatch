@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş Yap - Futmatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Genel Sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #E4E8EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .login-container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #E4E8EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    /* Header: sabit 100px yüksekliğinde, logonun yüksekliği header yüksekliği kadar */
+    .header {
+      background-color: #79EE8D;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header img {
+      height: 100%;
+      width: auto;
+    }
+    .form-container {
+      padding: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    form label {
+      margin-bottom: 5px;
+      color: #060C1C;
+      font-weight: 600;
+    }
+    form input {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #060C1C;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #fff;
+      outline: none;
+    }
+    form input:focus {
+      border-color: #79EE8D;
+    }
+    form button {
+      background-color: #79EE8D;
+      color: #060C1C;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    form button:hover {
+      background-color: #060C1C;
+      color: #79EE8D;
+    }
+    .social-login {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .social-login .or {
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #060C1C;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    .social-icons img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+    .social-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #060C1C;
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .toggle-link a {
+      color: #79EE8D;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .toggle-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="header">
+      <img src="logo.png" alt="Futmatch Logo">
+    </div>
+    <div class="form-container">
+      <form id="login-form">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" placeholder="E-posta adresinizi girin">
+        <label for="password">Şifre</label>
+        <input type="password" id="password" placeholder="Şifrenizi girin">
+        <button type="submit">Giriş Yap</button>
+      </form>
+      <div class="social-login">
+        <p class="or">veya</p>
+        <div class="social-icons">
+          <img src="google.png" alt="Google">
+          <img src="apple.png" alt="Apple">
+          <img src="facebook.png" alt="Facebook">
+          <img src="outlook.png" alt="Outlook">
+        </div>
+        <p class="social-text">ile giriş yap</p>
+      </div>
+      <div class="toggle-link">
+        <p>Hesabınız yok mu? <a href="hesapolustur.html">Hesap Oluştur</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Kayıtlı e-posta/şifre kontrolü yapılmadan doğrudan yönlendirme:
+      window.location.href = "ana-sayfa.html";
+    });
+  </script>
+</body>
+</html>

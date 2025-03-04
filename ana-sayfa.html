@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futmatch - Ana Sayfa</title>
   <!-- Google Fonts ve FontAwesome -->
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     /* Genel Sıfırlama ve Font */
@@ -16,9 +13,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
-    
     body {
       background-color: #E4E8EB;
       color: #060C1C;
@@ -28,8 +24,7 @@
       flex-direction: column;
       text-align: center;
     }
-    
-    /* NAVBAR */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -42,188 +37,181 @@
       left: 0;
       z-index: 999;
     }
-    
     .navbar-left {
       display: flex;
       align-items: center;
     }
-    
     .logo-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
-    
     .navbar-left h2 {
       font-size: 24px;
       font-weight: 600;
       color: #E4E8EB;
       margin-left: 10px;
     }
-    
     .navbar-right {
       display: flex;
       align-items: center;
       gap: 20px;
     }
-    
     .navbar-links a {
       color: #E4E8EB;
       text-decoration: none;
       font-size: 16px;
       padding: 5px 10px;
+      border-radius: 4px;
       transition: 0.3s;
     }
-    
     .navbar-links a:hover {
       color: #79EE8D;
     }
-    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #060C1C;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      z-index: 1000;
+    }
+    .dropdown-content a {
+      color: #E4E8EB;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      transition: background 0.3s;
+    }
+    .dropdown-content a:hover {
+      background: #79EE8D;
+      color: #060C1C;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
     .menu-icon i {
       font-size: 24px;
       cursor: pointer;
       color: #E4E8EB;
     }
-    
     /* Ana İçerik */
     .container {
       margin-top: 80px;
       padding: 20px;
     }
-    
-    /* Kulüp Kartı */
+    /* Kulüp Kartı (küçültüldü) */
     .club-card {
       background-color: #79EE8D;
       border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      padding: 15px;       /* Azaltıldı */
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
       color: #060C1C;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
+      margin-top: 20px;    /* Azaltıldı */
+      position: relative;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    
     .club-logo {
-      width: 50px;
-      height: 50px;
+      width: 160px; /* Güncel boyutun 2 katı */
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
+      position: absolute;
+      top: -80px; /* Logonun kutu dışına çıkması için */
     }
-    
     .club-info {
-      text-align: left;
+      margin-top: 90px; /* Logonun altındaki boşluk */
+      text-align: center;
     }
-    
     .club-info h2 {
       font-size: 24px;
       font-weight: 600;
       margin-bottom: 5px;
     }
-    
     .club-rank {
       font-size: 16px;
       display: flex;
       align-items: center;
       gap: 8px;
+      justify-content: center;
     }
-    
     .gold-icon {
       width: 1.4em;
       height: 1.4em;
       vertical-align: middle;
     }
-    
-    .club-calendar,
-    .club-match-info,
-    .club-rating {
-      font-size: 14px;
-    }
-    
-    /* Split Container: Ranking ve 2x2 Grid */
-    .split-container {
+    /* Buton Konteyneri */
+    .button-container {
       display: flex;
       gap: 20px;
-      margin-top: 20px;
-      align-items: stretch;
+      margin-top: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    
-    /* Başarı Sıralaması Kutusu (Buton haline getirildi) */
-    .ranking {
-      flex: 1;
-      background-color: #060C1C;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      color: #E4E8EB;
+    .left-column, .right-column {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      border: none;       /* Buton kenarlığını kaldırır */
-      cursor: pointer;    /* Üzerine gelindiğinde pointer imleç gösterir */
+      gap: 20px;
+      flex: 1;
+      max-width: 400px;
     }
-    
+    /* Yeni: Buton satırı için */
+    .double-button-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .button {
+      background-color: #060C1C;
+      border: none;
+      border-radius: 20px;
+      padding: 30px;
+      color: #E4E8EB;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      text-align: center;
+      flex: 1;
+    }
+    .button:hover {
+      background-color: #E4E8EB;
+      color: #060C1C;
+    }
+    /* Ranking butonuna özel stil */
     .ranking h3 {
       margin-bottom: 10px;
-      font-size: 18px;
     }
-    
     .ranking ol {
       list-style: none;
       padding-left: 0;
+      text-align: left;
     }
-    
     .ranking li {
       background-color: #79EE8D;
       color: #060C1C;
       padding: 10px;
       margin-bottom: 5px;
       border-radius: 8px;
-    }
-    
-    /* 2x2 Grid Kutucukları */
-    .grid-container {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 20px;
-    }
-    
-    .grid-box {
-      background-color: #060C1C;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      color: #E4E8EB;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .grid-box h3 {
-      margin-bottom: 10px;
       font-size: 18px;
-      color: #E4E8EB;
     }
-    
-    .grid-box button {
-      background-color: #79EE8D;
-      color: #060C1C;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    
-    .grid-box button:hover {
-      background-color: #E4E8EB;
-      color: #060C1C;
-    }
-    
     /* Footer */
     .footer {
       display: flex;
@@ -234,16 +222,14 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px -4px 6px rgba(0,0,0,0.3);
     }
-    
     .footer i {
       font-size: 24px;
       cursor: pointer;
       color: #79EE8D;
       transition: 0.3s;
     }
-    
     .footer i:hover {
       color: #E4E8EB;
     }
@@ -253,7 +239,7 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-left">
-      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img">
       <h2>Futmatch</h2>
     </div>
     <div class="navbar-right">
@@ -262,8 +248,17 @@
         <a href="mac-bul.html">Maç Bul</a>
         <a href="kulubum.html">Kulübüm</a>
         <a href="profile.html">Profil</a>
-        <a href="settings.html">Ayarlar</a>
-        <a href="livechat.html">Canlı Destek</a>
+        <a href="sohbetlerim.html">Mesajlar</a>
+        <a href="bildirimler.html">Bildirimler</a>
+        <div class="dropdown">
+          <a href="settings.html">Ayarlar</a>
+          <div class="dropdown-content">
+            <a href="hesap-ayarları.html">Hesap Ayarları</a>
+            <a href="oturum.html">Oturumu Kapat</a>
+            <a href="kullanici-sözleşmesi.html">Kullanıcı Sözleşmesi</a>
+            <a href="bize-ulasin.html">Bize Ulaşın</a>
+          </div>
+        </div>
       </div>
       <div class="menu-icon">
         <i class="fas fa-bars"></i>
@@ -275,47 +270,39 @@
   <div class="container">
     <!-- Kulüp Kartı -->
     <div class="club-card">
-      <img src="logo.png" alt="Kulüp Logosu" class="club-logo" />
+      <img src="logo.png" alt="Kulüp Logosu" class="club-logo">
       <div class="club-info">
         <h2>FutMatch Futbol Kulübü</h2>
         <p class="club-rank">
-          Gold 1 <img src="gold1.png" alt="Gold 1" class="gold-icon" />
+          Gold 1 <img src="gold1.png" alt="Gold 1" class="gold-icon">
         </p>
         <p class="club-rating">4.0 <i class="fas fa-globe"></i></p>
       </div>
     </div>
     
-    <!-- Split Container: Ranking ve 2x2 Grid -->
-    <div class="split-container">
-      <!-- Başarı Sıralaması Kutusu Buton -->
-      <button class="ranking" onclick="window.location.href='basari-siralamasi.html'">
-        <h3>Başarı Sıralaması</h3>
-        <ol>
-          <li>A Kulübü</li>
-          <li>B Kulübü</li>
-          <li>C Kulübü</li>
-          <li>Futmatch Kulübü</li>
-        </ol>
-      </button>
-      
-      <!-- 2x2 Grid Kutucukları -->
-      <div class="grid-container">
-        <div class="grid-box">
-          <h3>Tek maçlık oyuncu bul</h3>
-          <button onclick="window.location.href='oyuncu-bul.html'">Ara</button>
+    <!-- Buton Konteyneri -->
+    <div class="button-container">
+      <div class="left-column">
+        <button class="button ranking" onclick="window.location.href='basari-siralamasi.html'">
+          <h3>Başarı Sıralaması</h3>
+          <ol>
+            <li>A Kulübü</li>
+            <li>B Kulübü</li>
+            <li>C Kulübü</li>
+            <li>Futmatch Kulübü</li>
+          </ol>
+        </button>
+        <button class="button" onclick="window.location.href='oyuncu-bul.html'">Tek maçlık oyuncu bul</button>
+        <div class="double-button-container">
+          <button class="button" onclick="window.location.href='oyuncu-ol.html'">Tek maçlık oyuncu ol</button>
+          <button class="button" onclick="window.location.href='oyuncu-spotlight.html'">Oyuncu Spotlight</button>
         </div>
-        <div class="grid-box">
-          <h3>Tek maçlık oyuncu ol</h3>
-          <button onclick="window.location.href='oyuncu-ol.html'">Kaydol</button>
-        </div>
-        <div class="grid-box">
-          <h3>Mağaza</h3>
-          <button onclick="window.location.href='mağaza.html'">Giriş</button>
-        </div>
-        <div class="grid-box">
-          <h3>Halı sahalara göz at!</h3>
-          <button onclick="window.location.href='halısaha.html'">Göz at</button>
-        </div>
+      </div>
+      <div class="right-column">
+        <button class="button" onclick="window.location.href='mağaza.html'">Mağaza</button>
+        <button class="button" onclick="window.location.href='halısaha.html'">Halı sahalara göz at!</button>
+        <button class="button" onclick="window.location.href='turnuvalar.html'">Turnuvalar</button>
+        <button class="button" onclick="window.location.href='gundem.html'">FutMatch'te Gündem</button>
       </div>
     </div>
   </div>

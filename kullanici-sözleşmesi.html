@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kullanıcı Sözleşmesi - Futmatch</title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary-color: #060C1C;
+      --secondary-color: #79EE8D;
+      --bg-color: #E4E8EB;
+      --light-bg: #ffffff;
+    }
+    
+    /* Genel Sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--primary-color);
+      padding: 15px 20px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .navbar-left h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--light-bg);
+      margin-left: 10px;
+    }
+    
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .navbar-links a {
+      color: var(--light-bg);
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    
+    .navbar-links a:hover {
+      color: var(--secondary-color);
+    }
+    
+    /* Container */
+    .container {
+      margin-top: 80px;
+      padding: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+    
+    /* Kullanıcı Sözleşmesi İçeriği */
+    .agreement-section {
+      background-color: var(--light-bg);
+      padding: 20px;
+      border: 1px solid var(--secondary-color);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    
+    .agreement-section h2 {
+      color: var(--primary-color);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 5px;
+    }
+    
+    .agreement-section p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .agreement-section a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .agreement-section a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: auto;
+      background-color: var(--primary-color);
+      color: var(--light-bg);
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img">
+      <h2>Futmatch</h2>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-links">
+        <a href="ana-sayfa.html">Ana Sayfa</a>
+        <a href="mac-bul.html">Maç Bul</a>
+        <a href="kulubum.html">Kulübüm</a>
+        <a href="profile.html">Profil</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Ana İçerik -->
+  <div class="container">
+    <h1>Kullanıcı Sözleşmesi</h1>
+    <div class="agreement-section">
+      <p>
+        Bu Kullanıcı Sözleşmesi ("Sözleşme"), Futmatch uygulaması ("Uygulama") üzerinden futbol tutkunlarının birbirlerini ekleyerek, rütbeli ve rütbesiz maçlar düzenlemelerine olanak tanıyan hizmetlerin kullanım koşullarını belirler. Uygulamayı kullanarak, bu Sözleşme’nin tüm hükümlerini kabul etmiş sayılırsınız.
+      </p>
+      <h2>1. Tanımlar</h2>
+      <p>
+        <strong>Uygulama:</strong> Futmatch mobil ve web uygulaması.<br>
+        <strong>Kullanıcı:</strong> Uygulamaya kayıt olan, hizmetleri kullanan gerçek kişi veya kuruluş.<br>
+        <strong>Hizmetler:</strong> Maç düzenleme, arkadaş ekleme, rütbeli ve rütbesiz maç yapma, bildirim gönderme ve diğer futbol aktiviteleri.
+      </p>
+      <h2>2. Hizmetlerin Kullanımı</h2>
+      <p>
+        Kullanıcı, Uygulama aracılığıyla sağlanan hizmetleri doğru, eksiksiz ve güncel bilgileri vererek kullanmalıdır. Hesap bilgilerinizin gizliliğinden siz sorumlusunuz. Uygulama, maç eşleştirmeleri, bildirimler, rütbe güncellemeleri ve diğer futbol aktivitelerini gerçekleştirmektedir.
+      </p>
+      <h2>3. Kullanıcı Yükümlülükleri</h2>
+      <p>
+        Kullanıcı, Uygulama’yı yasalara, ahlaki değerlere ve bu Sözleşme hükümlerine uygun şekilde kullanmayı taahhüt eder. Uygulama üzerinden paylaşılan içeriklerden tamamen kullanıcı sorumludur. Yanıltıcı, zararlı veya hukuka aykırı içerikler paylaşmak kesinlikle yasaktır.
+      </p>
+      <h2>4. Maç ve Eşleştirme Süreci</h2>
+      <p>
+        Futmatch, kullanıcıların rütbeli ve rütbesiz maçlar yapabilmelerine olanak sağlar. Maç eşleştirme süreci, karşılıklı randevular, bildirimler ve sistem tarafından otomatik olarak güncellenen rütbe bilgileriyle desteklenir. Maç sonuçlarından doğabilecek sorunlarda, Futmatch sorumluluk kabul etmez.
+      </p>
+      <h2>5. Fikri Mülkiyet Hakları</h2>
+      <p>
+        Uygulamada yer alan tüm içerik, tasarım, yazılım ve grafik unsurları ilgili fikri mülkiyet yasalarıyla korunmaktadır. Kullanıcılar, bu içerikleri izinsiz çoğaltamaz, değiştiremez veya dağıtamaz.
+      </p>
+      <h2>6. Sorumluluk Reddi</h2>
+      <p>
+        Futmatch, hizmetlerin kesintisiz, hatasız veya tamamen güncel olacağına dair garanti vermez. Uygulama kullanımı sonucu oluşabilecek her türlü zarardan kullanıcılar sorumludur. Özellikle maç düzenlemeleri ve eşleştirme sistemlerinin hatalı çalışması durumunda, Futmatch'in hiçbir şekilde tazminat ödemesi söz konusu değildir.
+      </p>
+      <h2>7. Değişiklik ve Fesih</h2>
+      <p>
+        Futmatch, bu Sözleşme’nin hükümlerinde zaman zaman değişiklik yapma hakkını saklı tutar. Yapılan değişiklikler, Uygulama üzerinden duyurulacak ve kullanıcılar, güncellenmiş Sözleşme’yi kabul etmiş sayılacaktır. Aksi takdirde, hizmetlerin kullanımı sonlandırılabilir.
+      </p>
+      <h2>8. Uyuşmazlık Çözümü</h2>
+      <p>
+        Bu Sözleşmeden kaynaklanan uyuşmazlıklar Türk Hukuku’na tabi olup, İstanbul mahkemeleri yetkilidir.
+      </p>
+      <h2>9. Gizlilik</h2>
+      <p>
+        Kullanıcıların kişisel verileri, gizlilik politikamız kapsamında işlenmekte ve korunmaktadır. Gizlilik politikamızı <a href="gizlilik-politikasi.html">buradan</a> inceleyebilirsiniz.
+      </p>
+      <h2>10. İletişim</h2>
+      <p>
+        Sözleşme ile ilgili her türlü soru, öneri veya şikayetlerinizi <a href="bize-ulasin.html">bize ulaşın</a> sayfası üzerinden iletebilirsiniz.
+      </p>
+      <p>
+        Bu Sözleşme, 1 Ocak 2023 tarihinden itibaren geçerli olup, Uygulama’yı kullanmaya başlayan tüm kullanıcılar tarafından kabul edilmiş sayılır.
+      </p>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 Futmatch. Tüm hakları saklıdır.</p>
+  </footer>
+</body>
+</html>

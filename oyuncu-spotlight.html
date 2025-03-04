@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oyuncu Spotlight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #E4E8EB;
+      color: #060C1C;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    /* Sekme (Tab) butonları */
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab-button {
+      background-color: #060C1C;
+      color: #E4E8EB;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin: 0 5px;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .tab-button.active {
+      background-color: #79EE8D;
+      color: #060C1C;
+    }
+    /* Sekme içerikleri */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    /* Oyuncu sıralama kartı */
+    .player-entry {
+      display: flex;
+      align-items: center;
+      background-color: #FFF;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    }
+    .player-entry img.player-profile {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .player-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .player-name {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .stats-row {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+    .player-rank {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Oyuncu Spotlight</h1>
+    <!-- Sekme butonları -->
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="gol">Gol Krallığı</button>
+      <button class="tab-button" data-tab="asist">Asist Krallığı</button>
+      <button class="tab-button" data-tab="rating">Rating</button>
+    </div>
+    
+    <!-- Sekme içerikleri -->
+    <div id="gol" class="tab-content active">
+      <!-- Gol Krallığı sıralaması burada oluşturulacak -->
+    </div>
+    <div id="asist" class="tab-content">
+      <!-- Asist Krallığı sıralaması burada oluşturulacak -->
+    </div>
+    <div id="rating" class="tab-content">
+      <!-- Rating sıralaması burada oluşturulacak -->
+    </div>
+  </div>
+  
+  <script>
+    // Rastgele maç sayısı üreten fonksiyon (5 ile 30 arasında)
+    function getRandomMatches() {
+      return Math.floor(Math.random() * 26) + 5;
+    }
+    
+    // Her kategori için örnek veri (metric: gol, asist veya rating değeri)
+    const goalKings = [
+      { name: "Oyuncu 1", metric: 20, matches: getRandomMatches() },
+      { name: "Oyuncu 2", metric: 20, matches: getRandomMatches() },
+      { name: "Oyuncu 3", metric: 18, matches: getRandomMatches() },
+      { name: "Oyuncu 4", metric: 15, matches: getRandomMatches() },
+      { name: "Oyuncu 5", metric: 10, matches: getRandomMatches() }
+    ];
+    
+    const assistKings = [
+      { name: "Oyuncu A", metric: 12, matches: getRandomMatches() },
+      { name: "Oyuncu B", metric: 12, matches: getRandomMatches() },
+      { name: "Oyuncu C", metric: 10, matches: getRandomMatches() },
+      { name: "Oyuncu D", metric: 8, matches: getRandomMatches() },
+      { name: "Oyuncu E", metric: 5, matches: getRandomMatches() }
+    ];
+    
+    const ratingKings = [
+      { name: "Oyuncu X", metric: 5, matches: getRandomMatches() },
+      { name: "Oyuncu Y", metric: 5, matches: getRandomMatches() },
+      { name: "Oyuncu Z", metric: 4, matches: getRandomMatches() },
+      { name: "Oyuncu W", metric: 3, matches: getRandomMatches() },
+      { name: "Oyuncu V", metric: 3, matches: getRandomMatches() }
+    ];
+    
+    // Sıralama: Ana metric'e göre azalan, eşit ise maç sayısına göre azalan
+    function sortPlayers(players) {
+      return players.sort((a, b) => {
+        if (b.metric === a.metric) {
+          return b.matches - a.matches;
+        }
+        return b.metric - a.metric;
+      });
+    }
+    
+    // Verilen veri dizisini alıp, belirtilen container içerisine oyuncu kartlarını ekleyen fonksiyon
+    // metricLabel: "Goller", "Asistler" veya "Rating" gibi etiket
+    function renderPlayers(containerId, players, metricLabel) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      players = sortPlayers(players);
+      players.forEach(player => {
+        const entry = document.createElement("div");
+        entry.className = "player-entry";
+        
+        // Profil resmi
+        const profileImg = document.createElement("img");
+        profileImg.src = "default-profile.PNG";
+        profileImg.alt = "Player Profile";
+        profileImg.className = "player-profile";
+        
+        // Detaylar
+        const details = document.createElement("div");
+        details.className = "player-details";
+        
+        const nameEl = document.createElement("span");
+        nameEl.className = "player-name";
+        nameEl.textContent = player.name;
+        
+        // Metric ve maç sayısını aynı satırda göster
+        const statsRow = document.createElement("div");
+        statsRow.className = "stats-row";
+        
+        const metricEl = document.createElement("span");
+        metricEl.textContent = metricLabel + ": " + player.metric;
+        
+        const matchesEl = document.createElement("span");
+        matchesEl.textContent = "Maç: " + player.matches;
+        
+        statsRow.appendChild(metricEl);
+        statsRow.appendChild(matchesEl);
+        
+        // Rütbe görseli
+        const rankImg = document.createElement("img");
+        rankImg.src = "gold1.png";
+        rankImg.alt = "Rank";
+        rankImg.className = "player-rank";
+        
+        details.appendChild(nameEl);
+        details.appendChild(statsRow);
+        details.appendChild(rankImg);
+        
+        entry.appendChild(profileImg);
+        entry.appendChild(details);
+        container.appendChild(entry);
+      });
+    }
+    
+    // İlk render: aktif sekme "Gol Krallığı"
+    renderPlayers("gol", goalKings, "Goller");
+    renderPlayers("asist", assistKings, "Asistler");
+    renderPlayers("rating", ratingKings, "Rating");
+    
+    // Sekme (Tab) değiştirme işlemleri
+    const tabButtons = document.querySelectorAll(".tab-button");
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        // Butonlardaki active sınıfını kaldır
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        
+        const tabId = button.getAttribute("data-tab");
+        // Tüm sekme içeriklerini gizle
+        document.querySelectorAll(".tab-content").forEach(tab => {
+          tab.classList.remove("active");
+        });
+        // Seçilen sekmeyi göster
+        document.getElementById(tabId).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

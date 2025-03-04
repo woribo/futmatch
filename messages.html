@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesajlaşma</title>
+  <!-- Google Fonts -->
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Genel Sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background-color: #E4E8EB;
+      color: #060C1C;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #060C1C;
+      padding: 15px 20px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .navbar-left h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #E4E8EB;
+      margin-left: 10px;
+    }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navbar-links a {
+      color: #E4E8EB;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    .navbar-links a:hover {
+      color: #79EE8D;
+    }
+    .menu-icon i {
+      font-size: 24px;
+      cursor: pointer;
+      color: #E4E8EB;
+    }
+    /* Chat Container */
+    .chat-container {
+      margin-top: 70px; /* Navbar yüksekliği kadar boşluk */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* Profil Header */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      background-color: #79EE8D;
+      padding: 15px 20px;
+      border-bottom: 1px solid #060C1C;
+    }
+    .profile-container {
+      display: flex;
+      align-items: center;
+    }
+    .back-button {
+      background-color: #ffffff;
+      border: none;
+      color: #060C1C;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+    .back-button:hover {
+      background-color: #f0f0f0;
+    }
+    .back-icon {
+      width: 20px;
+      height: 20px;
+    }
+    .profile-details {
+      display: flex;
+      align-items: center;
+    }
+    .profile-details img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-info .username {
+      font-size: 18px;
+      font-weight: 600;
+      color: #060C1C;
+    }
+    .profile-info .user-level {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #060C1C;
+    }
+    .profile-info .user-level img {
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+    }
+    /* Mesajlaşma Alanı */
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #E4E8EB;
+    }
+    .message {
+      max-width: 60%;
+      padding: 10px 15px;
+      border-radius: 15px;
+      background-color: #79EE8D;
+      color: #060C1C;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    .message.sent {
+      background-color: #060C1C;
+      color: #E4E8EB;
+      align-self: flex-end;
+    }
+    /* Mesaj Girişi */
+    .input-container {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-top: 1px solid #ccc;
+      background-color: #fff;
+    }
+    .input-container input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 16px;
+      outline: none;
+    }
+    .input-container button {
+      background-color: #79EE8D;
+      color: #060C1C;
+      border: none;
+      padding: 10px 20px;
+      margin-left: 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .input-container button:hover {
+      background-color: #60cc6a;
+    }
+    /* Scrollbar Özelleştirmesi */
+    .messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    .messages::-webkit-scrollbar-thumb {
+      background-color: #060C1C;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <h2>Futmatch</h2>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-links">
+        <a href="ana-sayfa.html">Ana Sayfa</a>
+        <a href="mac-bul.html">Maç Bul</a>
+        <a href="kulubum.html">Kulübüm</a>
+        <a href="profile.html">Profil</a>
+        <a href="settings.html">Ayarlar</a>
+        <a href="livechat.html">Canlı Destek</a>
+      </div>
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Chat Container -->
+  <div class="chat-container">
+    <!-- Profil Header -->
+    <div class="profile-header">
+      <div class="profile-container">
+        <button class="back-button" onclick="window.location.href='sohbetlerim.html'">
+          <img src="ok.png" alt="Geri" class="back-icon" />
+        </button>
+        <div class="profile-details">
+          <img src="default-profile.PNG" alt="Profil Resmi" />
+          <div class="profile-info">
+            <span class="username">dodousdt</span>
+            <span class="user-level">
+              Seviye: <img src="gold1.png" alt="Gold 1" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mesajlar Alanı -->
+    <div class="messages" id="messages">
+      <div class="message received">Merhaba, nasılsın?</div>
+      <div class="message sent">İyiyim, teşekkürler. Sen nasılsın?</div>
+      <div class="message received">Maç için hazır mısın?</div>
+    </div>
+    
+    <!-- Mesaj Girişi Alanı -->
+    <div class="input-container">
+      <input type="text" id="messageInput" placeholder="Mesajını yaz..." />
+      <button id="offerButton">Teklif Ver</button>
+    </div>
+  </div>
+  
+  <script>
+    const messageInput = document.getElementById('messageInput');
+    const messages = document.getElementById('messages');
+    
+    // Enter tuşu ile mesaj gönderme işlevi
+    messageInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+    
+    function sendMessage() {
+      const text = messageInput.value.trim();
+      if (text !== '') {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'sent');
+        messageDiv.textContent = text;
+        messages.appendChild(messageDiv);
+        messageInput.value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+    
+    // Teklif Ver butonuna tıklama işlevi
+    const offerButton = document.getElementById('offerButton');
+    offerButton.addEventListener('click', function() {
+      alert("Teklif ver butonuna tıklandı!");
+    });
+  </script>
+</body>
+</html>

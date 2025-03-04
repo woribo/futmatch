@@ -4,252 +4,313 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maç Bul - FutMatch</title>
-  <!-- Google Fonts ve FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Poppins ve Oswald -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
-    /* Genel Sıfırlama ve Font */
-    * {
+    /* CSS Değişkenleri */
+    :root {
+      --primary-color: #060C1C;
+      --secondary-color: #79EE8D;
+      --bg-color: #E4E8EB;
+      --light-bg: #fff;
+      --text-color: #060C1C;
+      --transition: 0.3s ease;
+    }
+    
+    /* Genel Sıfırlama ve Sabit Yükseklik */
+    html, body {
+      height: 100vh;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      overflow: hidden;
       font-family: "Poppins", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
     
-    /* Ana sayfa arka planı: açık renk */
     body {
-      background-color: #E4E8EB;
-      color: #060C1C;
-      width: 100%;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      text-align: center;
     }
     
-    /* NAVBAR */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #060C1C;
-      padding: 15px 20px;
+      background: var(--primary-color);
+      padding: 10px 15px;
       width: 100%;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 999;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      height: 50px;
     }
-    
     .navbar-left {
       display: flex;
       align-items: center;
     }
-    
     .logo-img {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       object-fit: cover;
     }
-    
     .navbar-left h2 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 600;
-      color: #E4E8EB;
-      margin-left: 10px;
+      color: var(--light-bg);
+      margin-left: 8px;
+      font-family: 'Oswald', sans-serif;
     }
-    
     .navbar-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 10px;
     }
-    
     .navbar-links a {
-      color: #E4E8EB;
+      color: var(--light-bg);
       text-decoration: none;
-      font-size: 16px;
-      padding: 5px 10px;
-      transition: 0.3s;
-    }
-    
-    .navbar-links a:hover {
-      color: #79EE8D;
-    }
-    
-    .menu-icon i {
-      font-size: 24px;
-      cursor: pointer;
-      color: #E4E8EB;
-    }
-    
-    /* İçerik Konteyneri */
-    .container {
-      margin-top: 80px; /* Navbar yüksekliği kadar boşluk */
-      padding: 20px;
-    }
-    
-    /* Rütbe, Seviye ve İlerleme Bölümü */
-    .rank-section {
-      background-color: #79EE8D;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      color: #060C1C;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-    }
-    
-    .rank-icon i {
-      font-size: 40px;
-      color: #060C1C;
-    }
-    
-    .rank-info h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #060C1C;
-    }
-    
-    .rank-info p {
-      font-size: 16px;
-      color: #060C1C;
-    }
-    
-    .rank-progress p {
       font-size: 14px;
-      margin-bottom: 10px;
-      color: #060C1C;
+      padding: 4px 8px;
+      transition: background var(--transition);
+      border-radius: 4px;
     }
-    
-    .progress-bar {
-      width: 100%;
-      background-color: #E4E8EB;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 20px;
+    .navbar-links a:hover {
+      background: var(--secondary-color);
+      color: var(--primary-color);
     }
-    
-    .progress {
-      width: 50%; /* Örnek ilerleme değeri */
-      height: 100%;
-      background-color: #060C1C;
-    }
-    
-    /* Maç Filtreleme Seçenekleri */
-    .match-filters {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    
-    .filter-btn, .start-btn {
-      background-color: #060C1C;
-      color: #E4E8EB;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
+    .menu-icon i {
+      font-size: 20px;
       cursor: pointer;
-      transition: 0.3s;
+      color: var(--light-bg);
     }
     
-    .filter-btn:hover, .start-btn:hover {
-      background-color: #79EE8D;
-      color: #060C1C;
-    }
-    
-    /* Maç Tipi (Dereceli / Derecesiz) */
-    .match-type {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    
-    .match-type a, .match-type button {
-      background-color: #060C1C;
-      color: #E4E8EB;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    
-    .match-type a:hover, .match-type button:hover {
-      background-color: #79EE8D;
-      color: #060C1C;
-    }
-    
-    /* Yeni eklenen alanlar için stil */
-    #field-options, #calendar {
-      display: none;
-      margin-top: 10px;
-      background-color: #fff;
+    /* İçerik Konteyneri - Ekran ortasına yerleştirildi */
+    .container {
+      position: relative;
+      margin-top: 50px;  /* Navbar yüksekliği kadar boşluk */
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      text-align: left;
-      max-width: 300px;
+      max-width: 800px;
+      width: 95%;
       margin-left: auto;
       margin-right: auto;
+      height: calc(100vh - 50px); /* Navbar hariç kalan alan */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     
-    #field-options label {
+    /* Üst Sol Köşede Mod Etiketi */
+    #mode-label {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 8px;
+      border: 1px solid var(--primary-color);
+      background: var(--light-bg);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--primary-color);
+      border-radius: 4px;
+      z-index: 1;
+    }
+    
+    /* Rütbe Bölümü */
+    .rank-section {
+      background: linear-gradient(135deg, var(--secondary-color), #a5f1bd);
+      border-radius: 15px;
+      padding: 5px;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+    .rank-info {
+      text-align: center;
+    }
+    .gold-image {
+      width: 100%;
+      max-width: 100px;
+      height: auto;
+      margin: 0 auto 5px;
       display: block;
+    }
+    .rank-info h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      color: var(--primary-color);
+      font-family: 'Oswald', sans-serif;
+    }
+    .rank-info p {
+      font-size: 12px;
+      color: var(--primary-color);
+    }
+    .rank-progress p {
+      font-size: 12px;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+    .progress-bar {
+      display: flex;
+      background: var(--light-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      height: 10px;
+      margin: 3px 0;
+    }
+    .segment {
+      flex: 1;
+      background: transparent;
+      border-right: 1px solid #fff;
+    }
+    .segment:last-child {
+      border-right: none;
+    }
+    .segment.filled {
+      background: var(--primary-color);
+    }
+    
+    /* Maç Filtreleme Bölümü */
+    .match-filters {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      margin-bottom: 8px;
+      width: 100%;
+      align-items: stretch; /* Kutuların aynı yüksekliğe ulaşmasını sağlar */
+    }
+    /* Tarih ve Saat Kutusu */
+    .date-time-box {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      background: var(--light-bg);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .date-time-box label {
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+    .date-time-box .date-range,
+    .date-time-box .time-range {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .date-time-box input[type="date"],
+    .date-time-box input[type="time"] {
+      width: 100%;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .date-time-box .separator {
+      font-weight: bold;
+      font-size: 12px;
+    }
+    /* Halısaha Seç Kutusu */
+    .field-box {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      background: var(--light-bg);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;  /* Kutu içeriğini dikeyde ortalar */
+    }
+    .field-box label {
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      color: var(--primary-color);
       margin-bottom: 5px;
     }
-    
-    /* Alt Footer (Mobil Menü) */
-    .footer {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background-color: #060C1C;
-      padding: 15px;
-      position: fixed;
-      bottom: 0;
+    .field-box input[type="search"] {
       width: 100%;
-      box-shadow: 0px -4px 6px rgba(0,0,0,0.3);
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 12px;
     }
     
-    .footer i {
-      font-size: 24px;
+    /* Eşleşmeyi Başlat Butonu - Yatayda tam genişlikte */
+    .start-btn {
+      background: var(--primary-color);
+      color: var(--light-bg);
+      padding: 8px 12px;
+      border: none;
+      border-radius: 15px;
+      font-weight: 600;
       cursor: pointer;
-      color: #79EE8D;
-      transition: 0.3s;
+      transition: background var(--transition), transform var(--transition);
+      width: 100%;
+      margin: 0 auto 8px;
+      display: block;
+      font-size: 14px;
+    }
+    .start-btn:hover {
+      background: var(--secondary-color);
+      color: var(--primary-color);
+      transform: translateY(-2px);
     }
     
-    .footer i:hover {
-      color: #E4E8EB;
+    /* Maç Tipi Butonları - Yatayda esnek genişlikte */
+    .match-type {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      margin-bottom: 8px;
+      width: 100%;
     }
-    
-    /* Responsive Tasarım */
-    @media (min-width: 768px) {
-      .match-type {
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-      }
-      
-      .match-type a, .match-type button {
-        width: auto;
-      }
+    .match-type a,
+    .match-type button {
+      flex: 1;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--primary-color);
+      color: var(--light-bg);
+      border: none;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      text-decoration: none;
+    }
+    .match-type a.active,
+    .match-type button.active {
+      background: var(--secondary-color);
+      color: var(--primary-color);
+    }
+    .match-type a:hover,
+    .match-type button:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <!-- Güncellenmiş Navbar -->
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-left">
-      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img">
       <h2>Futmatch</h2>
     </div>
     <div class="navbar-right">
@@ -269,81 +330,61 @@
   
   <!-- İçerik Konteyneri -->
   <div class="container">
-    <!-- Üst Kısım (Rütbe, Seviye, İlerleme Çubuğu) -->
+    <!-- Üst Sol Köşede Mod Etiketi -->
+    <div id="mode-label">DERECELİ</div>
+    
+    <!-- Rütbe Bölümü -->
     <div class="rank-section">
-      <div class="rank-icon">
-        <i class="fas fa-shoe-prints"></i>
-      </div>
       <div class="rank-info">
+        <img src="gold1.png" alt="Gold Rank" class="gold-image">
         <h2>Gold 1 <i class="fas fa-crown"></i></h2>
         <p>4.0 <i class="fas fa-globe"></i></p>
       </div>
       <div class="rank-progress">
         <p>Rütbe İlerleme Göstergesi</p>
         <div class="progress-bar">
-          <!-- İlerleme barının dolu kısmı -->
-          <div class="progress"></div>
+          <div class="segment filled"></div>
+          <div class="segment filled"></div>
+          <div class="segment filled"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
         </div>
       </div>
     </div>
     
-    <!-- Maç Filtreleme Seçenekleri -->
+    <!-- Maç Filtreleme Bölümü -->
     <div class="match-filters">
-      <!-- Takvim açma butonu -->
-      <button class="filter-btn" id="date-btn">Uygun tarih aralığı ve saatleri seç...</button>
-      <div id="calendar">
-        <label for="start-date">Başlangıç Tarihi:</label>
-        <input type="date" id="start-date" name="start-date"><br>
-        <label for="end-date">Bitiş Tarihi:</label>
-        <input type="date" id="end-date" name="end-date">
+      <!-- Tarih ve Saat Aralığı Kutusu -->
+      <div class="filter-box date-time-box">
+        <label for="date-range">Tarih Aralığı Seç:</label>
+        <div class="date-range">
+          <input type="date" id="start-date" name="start-date">
+          <span class="separator"> - </span>
+          <input type="date" id="end-date" name="end-date">
+        </div>
+        <label for="time-range">Saat Aralığı Seç:</label>
+        <div class="time-range">
+          <input type="time" id="start-time" name="start-time">
+          <span class="separator"> - </span>
+          <input type="time" id="end-time" name="end-time">
+        </div>
       </div>
-      <!-- Saha seçimi butonu -->
-      <button class="filter-btn" id="field-btn">Oynamak istediğin sahaları seç...</button>
-      <div id="field-options">
-        <label><input type="checkbox" name="fields" value="Avcılar Olimpik"> Avcılar Olimpik</label>
-        <label><input type="checkbox" name="fields" value="Avcılar Platin"> Avcılar Platin</label>
-        <label><input type="checkbox" name="fields" value="Avcılar Dost"> Avcılar Dost</label>
+      <!-- Halısaha Seç Kutusu -->
+      <div class="filter-box field-box">
+        <label for="field-search">Halısaha Seç:</label>
+        <input type="search" id="field-search" name="field-search" placeholder="Halısaha Ara...">
       </div>
-      <!-- Eşleşmeyi başlat butonu -->
-      <button class="start-btn" onclick="window.location.href='eslesme-baslat.html'">Eşleşmeyi Başlat</button>
     </div>
     
-    <!-- Maç Tipi (Dereceli / Derecesiz) -->
+    <!-- Eşleşmeyi Başlat Butonu -->
+    <button class="start-btn" onclick="window.location.href='eslesme-baslat.html'">Eşleşmeyi Başlat</button>
+    
+    <!-- Maç Tipi Butonları -->
     <div class="match-type">
-      <a href="dereceli-mac.html" class="ranked-match">Dereceli Maç Yap</a>
+      <a href="dereceli-mac.html" class="ranked-match active">Dereceli Maç Yap</a>
       <button class="unranked-match" onclick="window.location.href='derecesiz-mac.html'">Derecesiz Maç Yap</button>
     </div>
   </div>
-  
-  <!-- Alt Footer (Mobil Menü) -->
-  <footer class="footer">
-    <i class="fas fa-home"></i>
-    <i class="fas fa-database"></i>
-    <i class="fas fa-futbol"></i>
-    <i class="fas fa-users"></i>
-    <i class="fas fa-smile"></i>
-  </footer>
-  
-  <script>
-    // Takvim alanını aç/kapat
-    document.getElementById("date-btn").addEventListener("click", function() {
-      var calendar = document.getElementById("calendar");
-      if (calendar.style.display === "none" || calendar.style.display === "") {
-        calendar.style.display = "block";
-      } else {
-        calendar.style.display = "none";
-      }
-    });
-    
-    // Saha seçeneklerini aç/kapat
-    document.getElementById("field-btn").addEventListener("click", function() {
-      var fieldOptions = document.getElementById("field-options");
-      if (fieldOptions.style.display === "none" || fieldOptions.style.display === "") {
-        fieldOptions.style.display = "block";
-      } else {
-        fieldOptions.style.display = "none";
-      }
-    });
-  </script>
 </body>
 </html>

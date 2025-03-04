@@ -4,43 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maç Bul - FutMatch</title>
-  <!-- Google Fonts ve FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Poppins ve Oswald, FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
-    /* Genel Sıfırlama ve Font */
+    /* CSS Değişkenleri ile Renk ve Geçiş Ayarları */
+    :root {
+      --primary-color: #060C1C;
+      --secondary-color: #79EE8D;
+      --bg-color: #E4E8EB;
+      --light-bg: #ffffff;
+      --text-color: #060C1C;
+      --transition-speed: 0.3s;
+    }
+    
+    /* Genel Ayarlar */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
     
-    /* Ana sayfa arka planı: açık renk */
     body {
-      background-color: #E4E8EB;
-      color: #060C1C;
-      width: 100%;
+      background: var(--bg-color);
+      color: var(--text-color);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      text-align: center;
     }
     
-    /* NAVBAR */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #060C1C;
+      background: var(--primary-color);
       padding: 15px 20px;
       width: 100%;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 999;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     
     .navbar-left {
@@ -53,13 +59,13 @@
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
+      margin-right: 10px;
     }
     
     .navbar-left h2 {
       font-size: 24px;
       font-weight: 600;
-      color: #E4E8EB;
-      margin-left: 10px;
+      color: var(--light-bg);
     }
     
     .navbar-right {
@@ -69,194 +75,144 @@
     }
     
     .navbar-links a {
-      color: #E4E8EB;
+      color: var(--light-bg);
       text-decoration: none;
       font-size: 16px;
       padding: 5px 10px;
-      transition: 0.3s;
+      border-radius: 4px;
+      transition: background var(--transition-speed);
     }
     
     .navbar-links a:hover {
-      color: #79EE8D;
+      background: var(--secondary-color);
+      color: var(--primary-color);
     }
     
     .menu-icon i {
       font-size: 24px;
       cursor: pointer;
-      color: #E4E8EB;
+      color: var(--light-bg);
     }
     
     /* İçerik Konteyneri */
     .container {
-      margin-top: 80px; /* Navbar yüksekliği kadar boşluk */
+      max-width: 1200px;
+      width: 90%;
+      margin: 100px auto 80px auto;
       padding: 20px;
     }
     
-    /* Rütbe, Seviye ve İlerleme Bölümü */
-    .rank-section {
-      background-color: #79EE8D;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      color: #060C1C;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-    }
-    
-    .rank-icon i {
-      font-size: 40px;
-      color: #060C1C;
-    }
-    
-    .rank-info h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #060C1C;
-    }
-    
-    .rank-info p {
-      font-size: 16px;
-      color: #060C1C;
-    }
-    
-    .rank-progress p {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #060C1C;
-    }
-    
-    .progress-bar {
-      width: 100%;
-      background-color: #E4E8EB;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 20px;
-    }
-    
-    .progress {
-      width: 50%; /* Örnek ilerleme değeri */
-      height: 100%;
-      background-color: #060C1C;
-    }
-    
-    /* Maç Filtreleme Seçenekleri */
-    .match-filters {
+    /* Maç Açıklama Alanı */
+    .match-explanations {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+      justify-content: center;
     }
     
-    .filter-btn, .start-btn {
-      background-color: #060C1C;
-      color: #E4E8EB;
-      padding: 10px 20px;
-      border: none;
+    .match-explanations .explanation {
+      background: var(--light-bg);
+      border: 2px solid var(--primary-color);
       border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
+      padding: 30px;
+      flex: 1 1 400px;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform var(--transition-speed);
     }
     
-    .filter-btn:hover, .start-btn:hover {
-      background-color: #79EE8D;
-      color: #060C1C;
+    .match-explanations .explanation:hover {
+      transform: translateY(-5px);
     }
     
-    /* Maç Tipi (Dereceli / Derecesiz) */
+    /* Başlık stili: yeşil, alt çizgi ve Oswald fontu */
+    .match-explanations .explanation strong {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--secondary-color);
+      color: var(--secondary-color);
+      font-family: 'Oswald', sans-serif;
+    }
+    
+    /* Maç Tipi Butonları */
     .match-type {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 20px;
     }
     
-    .match-type a, .match-type button {
-      background-color: #060C1C;
-      color: #E4E8EB;
-      padding: 10px 20px;
+    .match-type a,
+    .match-type button {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--primary-color);
+      color: var(--light-bg);
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
+      font-size: 18px;
       font-weight: 600;
       cursor: pointer;
+      transition: background var(--transition-speed), transform var(--transition-speed);
       text-decoration: none;
-      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     
-    .match-type a:hover, .match-type button:hover {
-      background-color: #79EE8D;
-      color: #060C1C;
+    .match-type a:hover,
+    .match-type button:hover {
+      background: var(--secondary-color);
+      color: var(--primary-color);
+      transform: translateY(-5px);
     }
     
-    /* Aktif durum için stil */
-    .match-type a.active {
-      background-color: #79EE8D;
-      color: #060C1C;
-      pointer-events: none;
-    }
-    
-    /* Yeni eklenen alanlar için stil */
-    #field-options, #calendar {
-      display: none;
-      margin-top: 10px;
-      background-color: #fff;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      text-align: left;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    #field-options label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    
-    /* Alt Footer (Mobil Menü) */
+    /* Footer */
     .footer {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: #060C1C;
+      background: var(--primary-color);
       padding: 15px;
       position: fixed;
       bottom: 0;
       width: 100%;
-      box-shadow: 0px -4px 6px rgba(0,0,0,0.3);
+      box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
     }
     
     .footer i {
       font-size: 24px;
       cursor: pointer;
-      color: #79EE8D;
-      transition: 0.3s;
+      color: var(--secondary-color);
+      transition: color var(--transition-speed);
     }
     
     .footer i:hover {
-      color: #E4E8EB;
+      color: var(--light-bg);
     }
     
-    /* Responsive Tasarım */
     @media (min-width: 768px) {
-      .match-type {
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-      }
-      
-      .match-type a, .match-type button {
-        width: auto;
+      .match-explanations .explanation {
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Güncellenmiş Navbar -->
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-left">
-      <img src="logo.png" alt="Futmatch Logo" class="logo-img" />
+      <img src="logo.png" alt="Futmatch Logo" class="logo-img">
       <h2>Futmatch</h2>
     </div>
     <div class="navbar-right">
@@ -276,54 +232,26 @@
   
   <!-- İçerik Konteyneri -->
   <div class="container">
-    <!-- Üst Kısım (Rütbe, Seviye, İlerleme Çubuğu) -->
-    <div class="rank-section">
-      <div class="rank-icon">
-        <i class="fas fa-shoe-prints"></i>
+    <!-- Maç Açıklama Alanı -->
+    <div class="match-explanations">
+      <div class="explanation">
+        <strong>Dereceli Maç Yap</strong>
+        Takımınızla beraber her başarılı maç, sadece kazanılan puanları değil, aynı zamanda taktiksel ustalığınızı ve takım ruhunuzu da geliştirir. Bu mod sayesinde, sürekli gelişen yeteneklerinizle kendi seviyenize uygun zorlu rakiplerle karşılaşarak rütbenizi adım adım yükseltebilirsiniz.
       </div>
-      <div class="rank-info">
-        <h2>Gold 1 <i class="fas fa-crown"></i></h2>
-        <p>4.0 <i class="fas fa-globe"></i></p>
-      </div>
-      <div class="rank-progress">
-        <p>Rütbe İlerleme Göstergesi</p>
-        <div class="progress-bar">
-          <!-- İlerleme barının dolu kısmı -->
-          <div class="progress"></div>
-        </div>
+      <div class="explanation">
+        <strong>Derecesiz Maç Yap</strong>
+        Maç yapmak istediğiniz sahalara üye olan takımlar arasında geniş bir seçim yelpazesi mevcut. İstediğiniz takıma maç daveti göndererek, daha serbest ve esnek rekabet ortamında keyifli mücadelelere katılabilir, sahadaki performansınızı dilediğiniz şekilde sergileyebilirsiniz.
       </div>
     </div>
     
-    <!-- Maç Filtreleme Seçenekleri -->
-    <div class="match-filters">
-      <!-- Takvim açma butonu -->
-      <button class="filter-btn" id="date-btn">Uygun tarih aralığı ve saatleri seç...</button>
-      <div id="calendar">
-        <label for="start-date">Başlangıç Tarihi:</label>
-        <input type="date" id="start-date" name="start-date"><br>
-        <label for="end-date">Bitiş Tarihi:</label>
-        <input type="date" id="end-date" name="end-date">
-      </div>
-      <!-- Saha seçimi butonu -->
-      <button class="filter-btn" id="field-btn">Oynamak istediğin sahaları seç...</button>
-      <div id="field-options">
-        <label><input type="checkbox" name="fields" value="Avcılar Olimpik"> Avcılar Olimpik</label>
-        <label><input type="checkbox" name="fields" value="Avcılar Platin"> Avcılar Platin</label>
-        <label><input type="checkbox" name="fields" value="Avcılar Dost"> Avcılar Dost</label>
-      </div>
-      <!-- Eşleşmeyi başlat butonu -->
-      <button class="start-btn" onclick="window.location.href='eslesme-baslat.html'">Eşleşmeyi Başlat</button>
-    </div>
-    
-    <!-- Maç Tipi (Dereceli / Derecesiz) -->
+    <!-- Maç Tipi Butonları -->
     <div class="match-type">
-      <!-- "active" sınıfı eklenerek dereceli maç yap butonunun aktif olduğu belli ediliyor -->
-      <a href="dereceli-mac.html" class="ranked-match active">Dereceli Maç Yap</a>
+      <a href="dereceli-mac.html" class="ranked-match">Dereceli Maç Yap</a>
       <button class="unranked-match" onclick="window.location.href='derecesiz-mac.html'">Derecesiz Maç Yap</button>
     </div>
   </div>
   
-  <!-- Alt Footer (Mobil Menü) -->
+  <!-- Footer -->
   <footer class="footer">
     <i class="fas fa-home"></i>
     <i class="fas fa-database"></i>
@@ -331,27 +259,5 @@
     <i class="fas fa-users"></i>
     <i class="fas fa-smile"></i>
   </footer>
-  
-  <script>
-    // Takvim alanını aç/kapat
-    document.getElementById("date-btn").addEventListener("click", function() {
-      var calendar = document.getElementById("calendar");
-      if (calendar.style.display === "none" || calendar.style.display === "") {
-        calendar.style.display = "block";
-      } else {
-        calendar.style.display = "none";
-      }
-    });
-    
-    // Saha seçeneklerini aç/kapat
-    document.getElementById("field-btn").addEventListener("click", function() {
-      var fieldOptions = document.getElementById("field-options");
-      if (fieldOptions.style.display === "none" || fieldOptions.style.display === "") {
-        fieldOptions.style.display = "block";
-      } else {
-        fieldOptions.style.display = "none";
-      }
-    });
-  </script>
 </body>
 </html>

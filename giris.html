@@ -131,9 +131,9 @@
     <div class="form-container">
       <form id="login-form">
         <label for="email">E-posta</label>
-        <input type="email" id="email" placeholder="E-posta adresinizi girin">
+        <input type="email" id="email" placeholder="E-posta adresinizi girin" required>
         <label for="password">Şifre</label>
-        <input type="password" id="password" placeholder="Şifrenizi girin">
+        <input type="password" id="password" placeholder="Şifrenizi girin" required>
         <button type="submit">Giriş Yap</button>
       </form>
       <div class="social-login">
@@ -152,11 +152,45 @@
     </div>
   </div>
   
-  <script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      // Kayıtlı e-posta/şifre kontrolü yapılmadan doğrudan yönlendirme:
-      window.location.href = "ana-sayfa.html";
+  <!-- Firebase Authentication entegrasyonu -->
+  <script type="module">
+    // Firebase modüler API kullanılarak gerekli modüller import ediliyor.
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+    // Firebase yapılandırma bilgileri
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4IbTra-kOa20voPa1bChybAVgcpUSAl0",
+      authDomain: "futmatch-48a52.firebaseapp.com",
+      projectId: "futmatch-48a52",
+      storageBucket: "futmatch-48a52.appspot.com",
+      messagingSenderId: "495344497877",
+      appId: "1:495344497877:web:7bab0eb14d175a85a2de5c"
+    };
+
+    // Firebase'i başlat
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Giriş formunun submit olayını yakala
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Formun sayfa yenilemesini engelle
+
+      // Formdaki email ve şifre değerlerini al
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Firebase Authentication ile giriş yapmayı dene
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Giriş başarılı ise, kullanıcı bilgileri userCredential.user içinde bulunur.
+          window.location.href = "ana-sayfa.html"; // Ana sayfaya yönlendir
+        })
+        .catch((error) => {
+          // Hata durumunda uyarı göster
+          alert("Giriş hatası: " + error.message);
+        });
     });
   </script>
 </body>

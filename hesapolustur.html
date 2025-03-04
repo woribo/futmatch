@@ -5,8 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hesap Oluştur - Futmatch</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Firebase modüllerini import et
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+    // Firebase yapılandırması
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4IbTra-kOa20voPa1bChybAVgcpUSAl0",
+      authDomain: "futmatch-48a52.firebaseapp.com",
+      projectId: "futmatch-48a52",
+      storageBucket: "futmatch-48a52.appspot.com",  // Hatalıydı, düzeltildi
+      messagingSenderId: "495344497877",
+      appId: "1:495344497877:web:7bab0eb14d175a85a2de5c"
+    };
+
+    // Firebase'i başlat
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Form gönderildiğinde kullanıcıyı Firebase'e kaydet
+    window.onload = function () {
+      document.getElementById("create-account-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Formun sayfayı yenilemesini engelle
+        
+        // Formdan değerleri al
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Firebase ile kullanıcı kaydı
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            alert("Kayıt başarılı! Artık giriş yapabilirsiniz.");
+            window.location.href = "giris.html"; // Kullanıcıyı giriş sayfasına yönlendir
+          })
+          .catch((error) => {
+            alert("Hata: " + error.message);
+          });
+      });
+    };
+  </script>
+
   <style>
-    /* Genel Sıfırlama */
     * {
       margin: 0;
       padding: 0;
@@ -114,7 +156,6 @@
 </head>
 <body>
   <div class="login-container">
-    <!-- Header kısmı, giriş sayfasıyla aynı şekilde logoyu içeriyor -->
     <div class="header">
       <img src="logo.png" alt="Futmatch Logo">
     </div>
@@ -164,13 +205,5 @@
       </div>
     </div>
   </div>
-  
-  <script>
-    document.getElementById('create-account-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Formun varsayılan gönderilmesini engelle
-      // Tüm required alanlar doldurulduysa (tarayıcı kontrolü sayesinde), e-posta doğrulama sayfasına yönlendir.
-      window.location.href = "eposta-dogrulama.html";
-    });
-  </script>
 </body>
 </html>

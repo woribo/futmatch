@@ -17,7 +17,7 @@
       apiKey: "AIzaSyC4IbTra-kOa20voPa1bChybAVgcpUSAl0",
       authDomain: "futmatch-48a52.firebaseapp.com",
       projectId: "futmatch-48a52",
-      storageBucket: "futmatch-48a52.appspot.com",  // Hatalıydı, düzeltildi
+      storageBucket: "futmatch-48a52.appspot.com",
       messagingSenderId: "495344497877",
       appId: "1:495344497877:web:7bab0eb14d175a85a2de5c"
     };
@@ -27,10 +27,14 @@
     const auth = getAuth(app);
 
     // Form gönderildiğinde kullanıcıyı Firebase'e kaydet
-    window.onload = function () {
+    window.addEventListener("load", () => {
       document.getElementById("create-account-form").addEventListener("submit", function (event) {
         event.preventDefault(); // Formun sayfayı yenilemesini engelle
-        
+
+        // Hata mesajı elementini temizle
+        const emailError = document.getElementById("emailError");
+        emailError.textContent = "";
+
         // Formdan değerleri al
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
@@ -42,10 +46,16 @@
             window.location.href = "giris.html"; // Kullanıcıyı giriş sayfasına yönlendir
           })
           .catch((error) => {
-            alert("Hata: " + error.message);
+            if (error.code === "auth/invalid-email") {
+              emailError.textContent = "Geçersiz e-posta adresi.";
+            } else if (error.code === "auth/email-already-in-use") {
+              emailError.textContent = "Bu e-posta zaten kullanılıyor.";
+            } else {
+              emailError.textContent = "Bir hata oluştu, lütfen tekrar deneyin.";
+            }
           });
       });
-    };
+    });
   </script>
 
   <style>
@@ -152,6 +162,12 @@
     .toggle-link a:hover {
       text-decoration: underline;
     }
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -170,6 +186,8 @@
         
         <label for="email">E-posta</label>
         <input type="email" id="email" placeholder="E-posta adresinizi girin" required>
+        <!-- Hata mesajı için alan -->
+        <p id="emailError" class="error-message"></p>
         
         <label for="password">Şifre</label>
         <input type="password" id="password" placeholder="Şifrenizi oluşturun" required>

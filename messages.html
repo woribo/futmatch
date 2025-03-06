@@ -73,15 +73,84 @@
       cursor: pointer;
       color: #E4E8EB;
     }
-    /* Chat Container */
+    /* Ana Chat Container (iki sütunlu düzen) */
     .chat-container {
       margin-top: 70px; /* Navbar yüksekliği kadar boşluk */
       flex: 1;
       display: flex;
-      flex-direction: column;
       overflow: hidden;
     }
-    /* Profil Header */
+    /* Sol Taraftaki Sohbet Önizleme Bölümü (Sidebar) */
+    .chat-sidebar {
+      width: 300px;
+      background-color: #fff;
+      border-right: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      padding: 15px;
+      background-color: #79EE8D;
+      color: #060C1C;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sidebar-header h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .sidebar-search {
+      width: 90%;
+      padding: 8px 10px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+    .chat-preview-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .chat-preview {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .chat-preview:hover {
+      background-color: #f8f8f8;
+    }
+    .preview-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .preview-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .preview-username {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .preview-snippet {
+      font-size: 14px;
+      color: #060C1C;
+      opacity: 0.7;
+    }
+    /* Sağ Taraftaki Aktif Mesajlaşma Bölümü */
+    .chat-conversation {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #E4E8EB;
+    }
+    /* Konuşma Başlığı (Geri tuşu kaldırıldı) */
     .profile-header {
       display: flex;
       align-items: center;
@@ -92,22 +161,6 @@
     .profile-container {
       display: flex;
       align-items: center;
-    }
-    .back-button {
-      background-color: #ffffff;
-      border: none;
-      color: #060C1C;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 15px;
-    }
-    .back-button:hover {
-      background-color: #f0f0f0;
-    }
-    .back-icon {
-      width: 20px;
-      height: 20px;
     }
     .profile-details {
       display: flex;
@@ -228,35 +281,61 @@
   
   <!-- Chat Container -->
   <div class="chat-container">
-    <!-- Profil Header -->
-    <div class="profile-header">
-      <div class="profile-container">
-        <button class="back-button" onclick="window.location.href='sohbetlerim.html'">
-          <img src="ok.png" alt="Geri" class="back-icon" />
-        </button>
-        <div class="profile-details">
-          <img src="default-profile.PNG" alt="Profil Resmi" />
-          <div class="profile-info">
-            <span class="username">dodousdt</span>
-            <span class="user-level">
-              Seviye: <img src="gold1.png" alt="Gold 1" />
-            </span>
+    <!-- Sol Taraf: Sohbet Önizlemeleri -->
+    <div class="chat-sidebar">
+      <div class="sidebar-header">
+        <h3>Mesajlar</h3>
+      </div>
+      <input type="text" class="sidebar-search" placeholder="Sohbet Ara...">
+      <div class="chat-preview-list">
+        <!-- Her bir sohbet önizlemesi -->
+        <div class="chat-preview" onclick="alert('Sohbet açıldı!')">
+          <img src="default-profile.PNG" alt="Profil" class="preview-pic">
+          <div class="preview-info">
+            <span class="preview-username">dodousdt</span>
+            <span class="preview-snippet">Merhaba, nasılsın?</span>
           </div>
         </div>
+        <div class="chat-preview" onclick="alert('Sohbet açıldı!')">
+          <img src="default-profile.PNG" alt="Profil" class="preview-pic">
+          <div class="preview-info">
+            <span class="preview-username">sinem</span>
+            <span class="preview-snippet">Toplantı yarın saat 10.</span>
+          </div>
+        </div>
+        <!-- İstediğiniz kadar sohbet ekleyin -->
       </div>
     </div>
     
-    <!-- Mesajlar Alanı -->
-    <div class="messages" id="messages">
-      <div class="message received">Merhaba, nasılsın?</div>
-      <div class="message sent">İyiyim, teşekkürler. Sen nasılsın?</div>
-      <div class="message received">Maç için hazır mısın?</div>
-    </div>
-    
-    <!-- Mesaj Girişi Alanı -->
-    <div class="input-container">
-      <input type="text" id="messageInput" placeholder="Mesajını yaz..." />
-      <button id="offerButton">Teklif Ver</button>
+    <!-- Sağ Taraf: Aktif Mesajlaşma Alanı -->
+    <div class="chat-conversation">
+      <!-- Konuşma Başlığı (Geri tuşu kaldırıldı) -->
+      <div class="profile-header">
+        <div class="profile-container">
+          <div class="profile-details">
+            <img src="default-profile.PNG" alt="Profil Resmi" />
+            <div class="profile-info">
+              <span class="username">dodousdt</span>
+              <span class="user-level">
+                Seviye: <img src="gold1.png" alt="Gold 1" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mesajlar Alanı -->
+      <div class="messages" id="messages">
+        <div class="message received">Merhaba, nasılsın?</div>
+        <div class="message sent">İyiyim, teşekkürler. Sen nasılsın?</div>
+        <div class="message received">Maç için hazır mısın?</div>
+      </div>
+      
+      <!-- Mesaj Girişi Alanı -->
+      <div class="input-container">
+        <input type="text" id="messageInput" placeholder="Mesajını yaz..." />
+        <button id="offerButton">Teklif Ver</button>
+      </div>
     </div>
   </div>
   

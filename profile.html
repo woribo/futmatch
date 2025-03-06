@@ -6,9 +6,14 @@
   <title>Futmatch Profil</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <!-- Firebase SDK’ları (v8) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
     /* Genel Sıfırlama ve Font */
     * {
       margin: 0;
@@ -112,6 +117,10 @@
       background-color: #060C1C;
       color: #E4E8EB;
       font-weight: 600;
+    }
+    #friendSearchResults {
+      margin-top: 10px;
+      text-align: left;
     }
 
     .profile-header {
@@ -241,7 +250,7 @@
       text-align: center;
     }
 
-    /* Yorumlar Bölümü: Tüm yorumları kapsayan kutu */
+    /* Yorumlar Bölümü */
     .comments {
       background-color: #E4E8EB;
       border: 2px solid #79EE8D;
@@ -345,6 +354,7 @@
     <!-- Arkadaş ekle arama çubuğu -->
     <div id="friendSearchBar" class="friend-search-bar">
       <input type="text" placeholder="Ara...">
+      <div id="friendSearchResults"></div>
     </div>
 
     <div class="profile-header">
@@ -380,28 +390,28 @@
       </div>
     </div>
 
-    <!-- Stats ve Performans bölümleri -->
+    <!-- Stats ve Performans bölümleri (Maç yapılmadıkça 0 olarak) -->
     <div class="stats-performance-container">
       <div class="stats">
         <h2>Son 5 Maç</h2>
         <div class="stat-items">
-          <div class="stat-circle">Hız<br>4/5</div>
-          <div class="stat-circle">Şut<br>5/5</div>
-          <div class="stat-circle">Pas<br>4/5</div>
+          <div class="stat-circle">Hız<br>0/5</div>
+          <div class="stat-circle">Şut<br>0/5</div>
+          <div class="stat-circle">Pas<br>0/5</div>
         </div>
       </div>
 
       <div class="performance">
         <h2>Performans</h2>
         <div class="stat-items">
-          <div class="stat-circle">Gol<br>15</div>
-          <div class="stat-circle">Asist<br>30</div>
-          <div class="stat-circle">MVP<br>4</div>
+          <div class="stat-circle">Gol<br>0</div>
+          <div class="stat-circle">Asist<br>0</div>
+          <div class="stat-circle">MVP<br>0</div>
         </div>
       </div>
     </div>
 
-    <!-- Yorumlar Bölümü: Tüm yorumları kapsayan kutu -->
+    <!-- Yorumlar Bölümü -->
     <div class="comments">
       <h2>Yorumlar</h2>
       <div class="comment">
@@ -426,6 +436,43 @@
   </footer>
 
   <script>
+    // Firebase yapılandırmanız (kendi bilgilerinizi ekleyin)
+    var firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    // Firebase başlatma
+    firebase.initializeApp(firebaseConfig);
+    var auth = firebase.auth();
+    var db = firebase.firestore();
+    var storage = firebase.storage();
+
+    // Kullanıcı oturum durumunu kontrol et ve Firestore'dan verileri yükle
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        db.collection("users").doc(user.uid).get().then(function(doc) {
+          if (doc.exists) {
+            var userData = doc.data();
+            document.getElementById("profileName").innerText = userData.displayName || "Kullanıcı Adı";
+            document.querySelector(".username").innerText = "@" + (userData.username || "kullanici");
+            document.getElementById("profileAge").innerText = userData.age || "19";
+            document.getElementById("profileJersey").innerText = userData.jersey || "7";
+            document.getElementById("profilePosition").innerText = userData.position || "Forvet";
+            if(userData.profilePic) {
+              document.querySelector(".profile-pic").src = userData.profilePic;
+            }
+          }
+        });
+      } else {
+        console.log("User not signed in.");
+        // Giriş yapılmamışsa, login sayfasına yönlendirme yapabilirsiniz.
+      }
+    });
+
     function toggleFriendSearch() {
       const searchBar = document.getElementById("friendSearchBar");
       searchBar.style.display = (searchBar.style.display === "block") ? "none" : "block";
@@ -436,27 +483,83 @@
       editForm.style.display = (editForm.style.display === "block") ? "none" : "block";
     }
 
+    // Profili düzenle ve Firebase'a kaydet
     function saveProfileChanges() {
-      // Güncellenen verileri al
       const age = document.getElementById("editAge").value;
       const jersey = document.getElementById("editJersey").value;
       const position = document.getElementById("editPosition").value;
 
-      // Profildeki değerleri güncelle
       document.getElementById("profileAge").innerText = age;
       document.getElementById("profileJersey").innerText = jersey;
       document.getElementById("profilePosition").innerText = position;
 
-      // Profil resmini güncelle (önizleme)
-      const fileInput = document.getElementById("editPhoto");
-      if(fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.querySelector(".profile-pic").src = e.target.result;
+      var user = firebase.auth().currentUser;
+      if (user) {
+        var userId = user.uid;
+        // Firestore'da kullanıcı belgesini güncelle
+        db.collection("users").doc(userId).update({
+          age: age,
+          jersey: jersey,
+          position: position
+        }).then(function() {
+          console.log("Profile updated successfully in Firestore.");
+        }).catch(function(error) {
+          console.error("Error updating profile:", error);
+        });
+
+        // Profil resmi güncellemesi
+        const fileInput = document.getElementById("editPhoto");
+        if(fileInput.files && fileInput.files[0]) {
+          const file = fileInput.files[0];
+          var storageRef = firebase.storage().ref();
+          var profilePicRef = storageRef.child('profilePics/' + userId);
+          profilePicRef.put(file).then(function(snapshot) {
+            return snapshot.ref.getDownloadURL();
+          }).then(function(downloadURL) {
+            document.querySelector(".profile-pic").src = downloadURL;
+            return db.collection("users").doc(userId).update({
+              profilePic: downloadURL
+            });
+          }).then(function() {
+            console.log("Profile picture updated successfully.");
+          }).catch(function(error) {
+            console.error("Error uploading profile picture:", error);
+          });
         }
-        reader.readAsDataURL(fileInput.files[0]);
       }
       toggleEditProfile();
+    }
+
+    // Arkadaş arama: input'ta tuşa basıldığında Firestore'da arama yap
+    document.querySelector("#friendSearchBar input").addEventListener("keyup", searchFriends);
+    function searchFriends() {
+      const queryText = document.querySelector("#friendSearchBar input").value;
+      db.collection("users")
+        .orderBy("username")
+        .startAt(queryText)
+        .endAt(queryText + "\uf8ff")
+        .get()
+        .then(function(snapshot) {
+          const resultsDiv = document.getElementById("friendSearchResults");
+          resultsDiv.innerHTML = ""; // Önceki sonuçları temizle
+          snapshot.forEach(function(doc) {
+            var userData = doc.data();
+            var userDiv = document.createElement("div");
+            userDiv.innerText = userData.username;
+            // İsteğe bağlı: Arkadaşlık isteği gönderme butonu ekleyin
+            var addButton = document.createElement("button");
+            addButton.innerText = "Arkadaş Ekle";
+            addButton.onclick = function() {
+              console.log("Friend request sent to:", userData.username);
+              // Burada arkadaşlık isteği işlevselliğini uygulayabilirsiniz.
+            };
+            userDiv.appendChild(addButton);
+            resultsDiv.appendChild(userDiv);
+          });
+        })
+        .catch(function(error) {
+          console.error("Error searching friends:", error);
+        });
     }
   </script>
 </body>
